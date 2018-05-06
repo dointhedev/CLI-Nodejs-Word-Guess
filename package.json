@@ -1,0 +1,28 @@
+{
+  "name": "cli-nodejs-word-guess",
+  "version": "1.0.0",
+  "description": "This will be a cool CLI WordGame",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dointhedev/CLI-Nodejs-Word-Guess.git"
+  },
+  "keywords": [
+    "Node"
+  ],
+  "author": "Avi Davis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dointhedev/CLI-Nodejs-Word-Guess/issues"
+  },
+  "homepage": "https://github.com/dointhedev/CLI-Nodejs-Word-Guess#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^5.2.0",
+    "jsonfile": "^4.0.0",
+    "random-words": "^1.1.0"
+  }
+}
