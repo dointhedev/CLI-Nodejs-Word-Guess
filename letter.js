@@ -6,64 +6,70 @@ var wordJS = require("./word.js").word;
 
 
 /*:::::::::::: GLOBAL VARIABLES :::::::::*/
-var points = wordJS.count + 5; 
-var chsn = [];
+var wrdCnt = wordJS.count + 5;
+var nWrd = [];
+var wrWd = [];
+var letters = wordJS.letters;
+var blanks = wordJS.blanks;
+
+letters = JSON.parse(letters);
+blanks = JSON.parse(blanks);
+for (var i = 0; i < letters.length; i++) {
+  nWrd.push("_");
+}
+
+
 // get user's name
 function getLtr(user) {
+  // recursive function to go through the game. 
+  if (nWrd.toString() !== letters.toString()) {
+    if (wrdCnt > 0) {
+      console.log('::::::: Your Word :::::::');
+      console.log(letters);
+      console.log(nWrd);
+      // runs inquirer and asks the user for a letter which replies are
+      // stored within the variable letter inside of the .then statement
+      inquirer.prompt([{
+        name: "letter",
+        message: "Hey " + user + " Guess A Letter?"
+      }]).then(function (letter) {
+        wrdCnt--;
+        if (letter.letter !== '') {
+          // send the letter chosen to the game logic function. 
+          gameLgc(letter.letter);
+          getLtr(user);
+        } else {
+          console.log('Silly... Enter A Letter!');
+        }
+      });
 
-  if (points > 0) {
-  // runs inquirer and asks the user for a letter which replies are
-  // stored within the variable letter inside of the .then statement
-  inquirer.prompt([{
-      name: "letter",
-      message: "Hey " + user + " Guess A Letter?"
-  }]).then(function (letter) {
-      points--;
-      gameLgc(letter.letter);
-      getLtr(user);
-
-  });
-
-  function gameLgc(l){
-  var letters = wordJS.letters;
-  var blanks = wordJS.blanks; 
-    console.log(wordJS.word);
-  console.log(letters);
-  console.log(blanks);
-  chsn.push(l);
-  console.log("Wrong Letter Dungeon");
-  console.log(chsn);
+      function gameLgc(l) {
+        // if letter chosen is part of the word. 
+        if (letters.includes(l)) {
+          //loop through the letter array and grab the index if the letter and push that index into the new word array. 
+          for (var i = 0; i < letters.length; i++) {
+            if (letters[i] === l) {
+              console.log("YAY CORRECT!!!");
+              // push the right word to the new word array. 
+              nWrd[i] = l;
+            }
+          }
+        } else {
+          //push to the wrong word array
+          wrWd.push(l);
+          console.log('::::::: Wrong Hahaha :::::::');
+          console.log('::::::: Letter Dungeon :::::::');
+          console.log(wrWd);
+        }
+      }
+    } else {
+      console.log("YOU DEAD");
+    }
+  } else {
+    console.log("YOU WON");
   }
-
-}else{
-  console.log("YOU DEAD");
 }
-}
-
-
-
+// export the getLtr function 
 module.exports = {
   getLtr: getLtr
 }
-
-
-
-/*
- Letter.js: Contains a constructor, Letter. This constructor should be 
-able to either display an underlying character or a blank placeholder
- (such as an underscore), depending on whether or not the user has guessed
-  the letter. That means the constructor should define:
-
-   A string value to store the underlying character for the letter
-
-   A boolean value that stores whether that letter has been guessed yet
-
-   A function that returns the underlying character if the letter has been 
-   guessed, or a placeholder (like an underscore) if the letter has not been 
-   guessed
-
-   A function that takes a character as an argument and checks it
-    against the underlying character, updating the stored boolean value to true if it was 
-    guessed correctly
-   
-  */

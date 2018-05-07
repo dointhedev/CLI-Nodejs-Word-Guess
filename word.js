@@ -17,7 +17,7 @@ function genJFile(data) {
       console.log(err);
       return;
     }
-    console.log("data.json was updated!");
+   // console.log("data.json was updated!");
   });
 }
 // this function randomly generates a word
@@ -58,7 +58,7 @@ function genOBJ(word, letters, blanks, count) {
   nwWord.printWord();
   //console.log(nwWord);
   // appends the word object to logs/data.json
-  //genJFile(JSON.stringify(nwWord));
+  genJFile(JSON.stringify(nwWord));
   // exports the word object
 }
 
