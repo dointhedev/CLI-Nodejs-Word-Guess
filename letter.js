@@ -1,7 +1,6 @@
+
 /*:::::::::::: REQUIRE :::::::::*/
 var inquirer = require("inquirer");
-var letterJS = require("./index.js");
-var letterJS = require("./letter.js");
 var wordJS = require("./word.js").word;
 
 
@@ -10,10 +9,8 @@ var wrdCnt = wordJS.count + 5;
 var nWrd = [];
 var wrWd = [];
 var letters = wordJS.letters;
-var blanks = wordJS.blanks;
 
 letters = JSON.parse(letters);
-blanks = JSON.parse(blanks);
 for (var i = 0; i < letters.length; i++) {
   nWrd.push("_");
 }
@@ -34,13 +31,15 @@ function getLtr(user) {
         message: "Hey " + user + " Guess A Letter?"
       }]).then(function (letter) {
         wrdCnt--;
-        if (letter.letter !== '') {
+        var leT = letter.letter;
+        if (leT !== ''){
           // send the letter chosen to the game logic function. 
-          gameLgc(letter.letter);
+          gameLgc(leT);
           getLtr(user);
-        } else {
+         } else {
           console.log('Silly... Enter A Letter!');
-        }
+          getLtr(user);
+       }
       });
 
       function gameLgc(l) {
@@ -67,8 +66,7 @@ function getLtr(user) {
     }
   } else {
     console.log("YOU WON");
-  }
-}
+  }}
 // export the getLtr function 
 module.exports = {
   getLtr: getLtr
