@@ -1,5 +1,5 @@
 # CLI-Nodejs-Word-Guess
-> ### Example of working with Javascrip, Nodejs, Arrays, Constructor Functions and Recursive Functions.
+> ### Example of working with Javascript, Nodejs, Arrays, Constructor Functions and Recursive Functions.
 
 This repo is functionality in-complete — PRs and issues welcome it's 90% done!!
 
